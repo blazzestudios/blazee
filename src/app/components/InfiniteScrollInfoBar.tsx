@@ -3,15 +3,19 @@
 import React, { useEffect, useRef } from "react";
 
 const InfiniteScrollInfoBar = () => {
-  const logosRef = useRef(null);
+  const logosRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && logosRef.current) {
-      const ul = logosRef.current;
+      const ul = logosRef.current as HTMLUListElement; // Assert that it is an HTMLUListElement
       ul.insertAdjacentHTML("afterend", ul.outerHTML);
-      ul.nextSibling.setAttribute("aria-hidden", "true");
+      const nextSibling = ul.nextSibling as HTMLElement; // Assert nextSibling as HTMLElement
+      if (nextSibling) {
+        nextSibling.setAttribute("aria-hidden", "true");
+      }
     }
   }, []);
+
   // animate-infinite-scroll from tailwind config
   return (
     <div className="w-full inline-flex flex-nowrap overflow-hidden min-h-[66px]  border-y-[2px] border-[#1D1D1D]">
@@ -46,7 +50,7 @@ const InfiniteScrollInfoBar = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_416_122)">
+                <g clipPath="url(#clip0_416_122)">
                   <path
                     d="M11.0938 0.796143L11.2113 1.46805C12.1323 6.73342 16.2745 10.725 21.5769 11.4569L21.783 11.4854C16.558 11.7481 12.2206 15.924 11.7518 21.143L11.5917 22.9256C11.36 16.6606 6.28037 11.8411 -0.000271402 11.8902L0.872692 11.7234C6.25697 10.6948 10.4392 6.22359 11.0938 0.796143Z"
                     fill="white"
@@ -63,8 +67,6 @@ const InfiniteScrollInfoBar = () => {
                   </clipPath>
                 </defs>
               </svg>
-
-              {/* <img className="h-5" src={Logo} alt="Facebook" /> */}
             </li>
           );
         })}

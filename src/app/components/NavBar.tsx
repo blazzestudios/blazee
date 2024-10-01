@@ -5,7 +5,7 @@ import BlazzeFullIcon from "@/assets/icons/blazzeFullIcon.svg";
 import HamBurgerIcon from "@/assets/icons/hamburger.svg";
 import CloseIcon from "@/assets/icons/close.svg";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 export default function NavBar() {
