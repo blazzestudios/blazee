@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function NavBar() {
   const [open, SetOpen] = useState(false);
   return (
-    <div className="absolute top-0 w-full px-4 lg:px-5 py-5 lg:py-0 z-[1000] lg:border-b-[2px] border-[#1D1D1D] lg:bg-[#080808]  ">
+    <div className="absolute top-0 w-full px-4 lg:px-5 py-5 lg:py-0 z-[999] lg:border-b-[2px] border-[#1D1D1D] lg:bg-[#080808]  ">
       <div
         className={`w-full  backdrop-blur-3xl lg:backdrop-blur-none bg-[#35353560] lg:bg-transparent  py-5 px-6 lg:px-5 lg:py-0 flex flex-col gap-6 justify-between lg:max-w-[1300px] mx-auto  ${
           open ? "rounded-[20px] " : " rounded-full"

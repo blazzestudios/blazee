@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
 "use client";
 import ForwardArrow from "@/assets/icons/forwardArrow.svg";
 import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,12 +32,16 @@ const SeamlessScrollGallery: React.FC = () => {
     const trigger = ScrollTrigger.create({
       start: 0,
       onUpdate(self) {
-        if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
+        if (
+          self.progress === 1 &&
+          self.direction > 0
+          // && !self.wrapping
+        ) {
           wrapForward(self);
         } else if (
           self.progress < 1e-5 &&
-          self.direction < 0 &&
-          !self.wrapping
+          self.direction < 0
+          // && !self.wrapping
         ) {
           wrapBackward(self);
         } else {
@@ -41,7 +49,7 @@ const SeamlessScrollGallery: React.FC = () => {
             (iteration + self.progress) * seamlessLoop.duration()
           );
           scrub.invalidate().restart(); // Improve performance by reusing the same tween
-          self.wrapping = false;
+          // self.wrapping = false;
         }
       },
       end: "+=3000",
@@ -68,7 +76,7 @@ const SeamlessScrollGallery: React.FC = () => {
     }
 
     function scrubTo(totalTime: number) {
-      let progress =
+      const progress =
         (totalTime - seamlessLoop.duration() * iteration) /
         seamlessLoop.duration();
       if (progress > 1) {
@@ -98,10 +106,12 @@ const SeamlessScrollGallery: React.FC = () => {
         startTime = items.length * spacing + 0.5,
         loopTime = (items.length + overlap) * spacing + 1,
         rawSequence = gsap.timeline({ paused: true }),
+        // eslint-disable-next-line prefer-const
         seamlessLoop = gsap.timeline({
           paused: true,
           repeat: -1,
           onRepeat() {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             this._time === this._dur && (this._tTime += this._dur - 0.01);
           },
         }),
@@ -113,8 +123,8 @@ const SeamlessScrollGallery: React.FC = () => {
 
       // Create the staggered animation
       for (let i = 0; i < l; i++) {
-        let index = i % items.length;
-        let item = items[index];
+        const index = i % items.length;
+        const item = items[index];
         time = i * spacing;
         rawSequence
           .fromTo(
@@ -143,6 +153,7 @@ const SeamlessScrollGallery: React.FC = () => {
             },
             time
           );
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         i <= items.length && seamlessLoop.add("label" + i, time);
       }
 
@@ -176,7 +187,7 @@ const SeamlessScrollGallery: React.FC = () => {
   return (
     <div className="max-w-[1300px] h-full mx-auto relative  px-5 py-16 w-full  ">
       <div
-        // ref={galleryRef}
+        ref={galleryRef}
         className=" w-full h-full relative  flex flex-col overflow-hidden "
       >
         <ul className="cards  relative lg:w-[450px] w-[80vw]   aspect-[450/512] top-1/2 left-2/4 transform -translate-x-1/2 -translate-y-1/2 ">

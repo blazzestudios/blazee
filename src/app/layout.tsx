@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import { Maven_Pro } from "next/font/google";
+import MouseFollower from "./components/MouseFollower";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 
 const MavenPro = Maven_Pro({ subsets: ["latin"] });
 
@@ -20,9 +23,12 @@ export default function RootLayout({
       <body
         className={`${MavenPro.className}  antialiased fixed  w-full h-full`}
       >
+        <MouseFollower />
         <NavBar />
+
         {children}
       </body>
     </html>
   );
 }
+gsap.registerPlugin(ScrollTrigger);
