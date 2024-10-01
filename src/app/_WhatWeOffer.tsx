@@ -100,7 +100,7 @@ export default function WhatWeOffer() {
           Crafting Innovative Product Design & Development
         </h2>
       </div>
-      <div className="flex gap-9 w-full">
+      <div className="flex flex-col lg:flex-row gap-9 w-full">
         {[
           {
             topic: "STRATEGY",
