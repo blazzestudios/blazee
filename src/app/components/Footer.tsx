@@ -4,7 +4,7 @@ import BlazzeFullLogo from "@/assets/icons/blazzeFullIcon.svg";
 
 export default function Footer() {
   return (
-    <div className="flex w-full flex-col gap-[26px] lg:gap-[44px]">
+    <div className="flex w-full h-full flex-col gap-[26px] lg:gap-[44px]">
       <div className="w-full max-w-[1300px] lg:px-5 p-[26px] gap-6 flex-col flex mx-auto">
         <Image
           className="max-w-[68px] mt-5 ml-1"

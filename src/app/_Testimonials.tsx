@@ -1,220 +1,102 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
 "use client";
+import React, { useEffect, useRef, useState } from "react";
 import ForwardArrow from "@/assets/icons/forwardArrow.svg";
-import React, { useEffect, useRef } from "react";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SwipableCarousel from "./components/SwipableCarousel";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RatingIndicator from "./components/RatingIndicator";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const SeamlessScrollGallery: React.FC = () => {
-  const galleryRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    let iteration = 0; // Keeps track of the iteration
-
-    const spacing = 0.08, // Spacing between cards
-      snap = gsap.utils.snap(spacing), // Snap function for smooth snapping
-      cards = gsap.utils.toArray(".cards li") as HTMLElement[],
-      seamlessLoop = buildSeamlessLoop(cards, spacing),
-      scrub = gsap.to(seamlessLoop, {
-        // Scrub smoothly through the loop
-        totalTime: 0,
-        duration: 0.5,
-        ease: "power3",
-        paused: true,
-      });
-
-    const trigger = ScrollTrigger.create({
-      start: 0,
-      onUpdate(self) {
-        if (
-          self.progress === 1 &&
-          self.direction > 0
-          // && !self.wrapping
-        ) {
-          wrapForward(self);
-        } else if (
-          self.progress < 1e-5 &&
-          self.direction < 0
-          // && !self.wrapping
-        ) {
-          wrapBackward(self);
-        } else {
-          scrub.vars.totalTime = snap(
-            (iteration + self.progress) * seamlessLoop.duration()
-          );
-          scrub.invalidate().restart(); // Improve performance by reusing the same tween
-          // self.wrapping = false;
-        }
-      },
-      end: "+=3000",
-      pin: ".gallery",
-    });
-
-    function wrapForward(trigger: any) {
-      iteration++;
-      trigger.wrapping = true;
-      trigger.scroll(trigger.start + 1);
-    }
-
-    function wrapBackward(trigger: any) {
-      iteration--;
-      if (iteration < 0) {
-        iteration = 9;
-        seamlessLoop.totalTime(
-          seamlessLoop.totalTime() + seamlessLoop.duration() * 10
-        );
-        scrub.pause();
-      }
-      trigger.wrapping = true;
-      trigger.scroll(trigger.end - 1);
-    }
-
-    function scrubTo(totalTime: number) {
-      const progress =
-        (totalTime - seamlessLoop.duration() * iteration) /
-        seamlessLoop.duration();
-      if (progress > 1) {
-        wrapForward(trigger);
-      } else if (progress < 0) {
-        wrapBackward(trigger);
-      } else {
-        trigger.scroll(
-          trigger.start + progress * (trigger.end - trigger.start)
-        );
-      }
-    }
-
-    document
-      .querySelector(".next")
-      ?.addEventListener("click", () =>
-        scrubTo(scrub.vars.totalTime + spacing)
-      );
-    document
-      .querySelector(".prev")
-      ?.addEventListener("click", () =>
-        scrubTo(scrub.vars.totalTime - spacing)
-      );
-
-    function buildSeamlessLoop(items: HTMLElement[], spacing: number) {
-      let overlap = Math.ceil(1 / spacing),
-        startTime = items.length * spacing + 0.5,
-        loopTime = (items.length + overlap) * spacing + 1,
-        rawSequence = gsap.timeline({ paused: true }),
-        // eslint-disable-next-line prefer-const
-        seamlessLoop = gsap.timeline({
-          paused: true,
-          repeat: -1,
-          onRepeat() {
-            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            this._time === this._dur && (this._tTime += this._dur - 0.01);
-          },
-        }),
-        l = items.length + overlap * 2,
-        time = 0;
-
-      // Set initial state
-      gsap.set(items, { xPercent: 400, opacity: 0, scale: 0 });
-
-      // Create the staggered animation
-      for (let i = 0; i < l; i++) {
-        const index = i % items.length;
-        const item = items[index];
-        time = i * spacing;
-        rawSequence
-          .fromTo(
-            item,
-            { scale: 0, opacity: 0 },
-            {
-              scale: 1,
-              opacity: 1,
-              zIndex: 100,
-              duration: 0.5,
-              yoyo: true,
-              repeat: 1,
-              ease: "power1.in",
-              immediateRender: false,
-            },
-            time
-          )
-          .fromTo(
-            item,
-            { xPercent: 400 },
-            {
-              xPercent: -400,
-              duration: 1,
-              ease: "none",
-              immediateRender: false,
-            },
-            time
-          );
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        i <= items.length && seamlessLoop.add("label" + i, time);
-      }
-
-      rawSequence.time(startTime);
-      seamlessLoop
-        .to(rawSequence, {
-          time: loopTime,
-          duration: loopTime - startTime,
-          ease: "none",
-        })
-        .fromTo(
-          rawSequence,
-          { time: overlap * spacing + 1 },
-          {
-            time: startTime,
-            duration: startTime - (overlap * spacing + 1),
-            immediateRender: false,
-            ease: "none",
-          }
-        );
-
-      return seamlessLoop;
-    }
-
-    return () => {
-      // Cleanup ScrollTrigger on component unmount
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
+export default function SeamlessScrollGallery() {
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const slide = [
+    "#1a1a1a",
+    "6c6c6c",
+    "#7f6f7f",
+    "#1a1a1a",
+    "6c6c6c",
+    "#7f6f7f",
+  ];
   return (
-    <div className="max-w-[1300px] h-full mx-auto relative  px-5 py-16 w-full  ">
-      <div
-        ref={galleryRef}
-        className=" w-full h-full relative  flex flex-col overflow-hidden "
-      >
-        <ul className="cards  relative lg:w-[450px] w-[80vw]   aspect-[450/512] top-1/2 left-2/4 transform -translate-x-1/2 -translate-y-1/2 ">
-          {Array.from({ length: 20 }, (_, i) => (
-            <li
+    <div className="relative flex flex-col h-full w-full max-w-[1300px]  mx-auto gap-[26px] py-16">
+      <SwipableCarousel
+        index={currentIndex}
+        onIndexChange={setCurrentIndex}
+        sizeOfIndicator="1.2vh "
+        yposition="4"
+        autoSlide={false}
+        gapbetweenindicator="5"
+        slides={slide.map((slide, i) => {
+          return (
+            <div
+              style={{
+                transition: "opacity 0.5s ease, transform 0.5s ease", // Smooth transition for opacity and transform
+              }}
               key={i}
-              className=" list-none lg:w-[450px]  w-[80vw]   aspect-[450/512]  bg-[#171717] rounded-lg text-center leading-72 text-2xl absolute top-0 left-0"
+              className={`h-full w-full max-w-full lg:max-w-[450px]  lg:aspect-[450/512] aspect-[270/307]   flex justify-center items-center text-white  ${
+                currentIndex === i ? "opacity-100" : "opacity-45"
+              }`}
             >
-              {i}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="actions mx-auto w-full flex justify-center gap-[26px]">
-        <button className="prev  flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full">
+              <div
+                style={{
+                  transition: " transform 0.5s ease", // Smooth transition for opacity and transform
+                }}
+                className={`min-h-full min-w-full bg-[#171717] flex flex-col  justify-between items-start lg:p-11 p-6 ${
+                  currentIndex === i ? "scale-[100%]" : "scale-[70%]"
+                }`}
+              >
+                <div className="flex flex-col lg:gap-6 gap-3 items-start">
+                  <RatingIndicator rating={4} />
+                  <p className="lg:text-2xl text-sm font-medium text-white/80  overflow-hidden text-ellipsis leading-[14px] line-clamp-[15] lg:line-clamp-[10]">
+                    <span className="lg:text-4xl  lg:leading-[28px]">{`"`}</span>
+                    {
+                      "their team took our wellness brand and elevated it to new heights with their thoughtful design and strategic branding. our wellness brand and elevated it to new heights with their thoughtful design and strategic."
+                    }
+                    <span className="lg:text-4xl lg:leading-[28px]">{`"`}</span>
+                  </p>
+                </div>
+                <div className="flex gap-6 items-center">
+                  <div className="lg:min-w-[50px] min-w-[30px] aspect-square h-full bg-white rounded-full" />
+                  <div className=" flex flex-col items-start justify-start lg:gap-1">
+                    <p className="text-sm lg:text-2xl font-normal text-white ">
+                      shagirul hassan
+                    </p>
+                    <p className="text-xs lg:text-xl font-medium text-white/60 text-ellipsis line-clamp-1">
+                      {"Software Developer at Blazze but not welajojs"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      />
+      <div className=" mx-auto w-full flex justify-center gap-[26px] ">
+        <button
+          disabled={currentIndex === 0}
+          onClick={() => {
+            setCurrentIndex((i) => --i);
+          }}
+          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full cursor-pointer ${
+            currentIndex === 0 && "opacity-40"
+          }`}
+        >
           <Image
-            className="rotate-180 w-full"
+            className="rotate-180 w-full h-full"
             alt="prev"
             src={ForwardArrow}
-          ></Image>
+          />
         </button>
-        <button className="next  flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full">
-          <Image alt="prev" className="w-full" src={ForwardArrow}></Image>
+        <button
+          onClick={() => {
+            setCurrentIndex((i) => ++i);
+          }}
+          disabled={currentIndex === slide.length - 1}
+          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full  cursor-pointer ${
+            currentIndex === slide.length - 1 && "opacity-40"
+          }`}
+        >
+          <Image alt="next" className="w-full h-full" src={ForwardArrow} />
         </button>
       </div>
     </div>
   );
-};
-
-export default SeamlessScrollGallery;
+}

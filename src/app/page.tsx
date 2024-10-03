@@ -1,5 +1,6 @@
 import HeroSection from "./_HeroSection";
-import GalleryComponent from "./_Testimonials";
+import SeamlessScrollGallery from "./_Testimonials";
+
 import WhatWeOffer from "./_WhatWeOffer";
 
 import Footer from "./components/Footer";
@@ -12,7 +13,7 @@ export default function Home() {
       <HeroSection />
       <InfiniteScrollInfoBar />
       <WhatWeOffer />
-      <GalleryComponent />
+      <SeamlessScrollGallery />
 
       <Footer />
     </div>

@@ -20,7 +20,7 @@ export const CardShineEffect = ({
   return (
     <div
       onClick={() => setIsHovered((prev) => !prev)}
-      className=" aspect-[390/460] w-full h-full "
+      className=" lg:aspect-[390/460] min-h-[460px] w-full h-full "
     >
       <div
         style={{
@@ -60,7 +60,7 @@ export const CardShineEffect = ({
               {offers!.map((li, i) => {
                 return (
                   <div
-                    className="min-h-11 py-[10px] tracking-tighter text-start w-full border-b-[1px] border-black/20 my-auto flex items-center justify-start text-2xl font-extrabold text-black"
+                    className="min-h-11 py-[10px] tracking-tighter text-start w-full border-b-[1px] border-black/20 my-auto flex items-center justify-start lg:text-2xl text-xl font-extrabold text-black"
                     key={i}
                   >
                     {li}
