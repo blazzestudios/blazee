@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-
 export default function SwipableCarousel({
   slides,
-  autoSlide = false,
-  autoSlideInterval = 3000,
+  //   autoSlide = false,
+  //   autoSlideInterval = 3000,
   index,
-  onIndexChange,
-}: {
+}: //   onIndexChange,
+{
   yposition?: string;
   sizeOfIndicator?: string;
   enableIndicator?: boolean;
@@ -18,53 +16,53 @@ export default function SwipableCarousel({
   index: number;
   onIndexChange: (index: number) => void;
 }) {
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const minSwipeDistance = 20;
+  //   const [touchStart, setTouchStart] = useState<number | null>(null);
+  //   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  //   const minSwipeDistance = 20;
 
   // Update parent state and internal state when specific index is selected
-  const specificIndex = (index: number) => {
-    onIndexChange(index);
-  };
+  //   const specificIndex = (index: number) => {
+  //     onIndexChange(index);
+  //   };
 
-  const prev = () => {
-    const newIndex = index === 0 ? slides.length - 1 : index - 1;
-    onIndexChange(newIndex);
-  };
+  //   const prev = () => {
+  //     const newIndex = index === 0 ? slides.length - 1 : index - 1;
+  //     onIndexChange(newIndex);
+  //   };
 
-  const next = useCallback(() => {
-    const newIndex = index === slides.length - 1 ? 0 : index + 1;
-    onIndexChange(newIndex);
-  }, [index, slides.length, onIndexChange]);
+  //   const next = useCallback(() => {
+  //     const newIndex = index === slides.length - 1 ? 0 : index + 1;
+  //     onIndexChange(newIndex);
+  //   }, [index, slides.length, onIndexChange]);
 
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
+  //   const onTouchStart = (e: React.TouchEvent) => {
+  //     setTouchEnd(null);
+  //     setTouchStart(e.targetTouches[0].clientX);
+  //   };
 
-  const onTouchMove = (e: React.TouchEvent) =>
-    setTouchEnd(e.targetTouches[0].clientX);
+  //   const onTouchMove = (e: React.TouchEvent) =>
+  //     setTouchEnd(e.targetTouches[0].clientX);
 
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+  //   const onTouchEnd = () => {
+  //     if (!touchStart || !touchEnd) return;
+  //     const distance = touchStart - touchEnd;
+  //     const isLeftSwipe = distance > minSwipeDistance;
+  //     const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe || isRightSwipe) {
-      if (isLeftSwipe) {
-        next();
-      } else {
-        prev();
-      }
-    }
-  };
+  //     if (isLeftSwipe || isRightSwipe) {
+  //       if (isLeftSwipe) {
+  //         next();
+  //       } else {
+  //         prev();
+  //       }
+  //     }
+  //   };
 
-  useEffect(() => {
-    if (!autoSlide) return;
-    const slideInterval = setInterval(next, autoSlideInterval);
-    return () => clearInterval(slideInterval);
-  }, [autoSlide, autoSlideInterval, next]);
+  //   useEffect(() => {
+  //     if (!autoSlide) return;
+  //     const slideInterval = setInterval(next, autoSlideInterval);
+  //     return () => clearInterval(slideInterval);
+  //   }, [autoSlide, autoSlideInterval, next]);
 
   return (
     <div

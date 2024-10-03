@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ForwardArrow from "@/assets/icons/forwardArrow.svg";
 import SwipableCarousel from "./components/SwipableCarousel";
 import Image from "next/image";

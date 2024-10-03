@@ -72,20 +72,6 @@ export const CardShineEffect = ({
         </div>
       </div>
     </div>
-    // <div className="bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] aspect-[390/460] w-full h-full bg-[#080808] relative max-w-md overflow-hidden  border-[#1D1D1D] border-[2px] bg-[length:250%_250%,100%_100%] bg-[position:-100%_0,0_0] bg-no-repeat p-[26px] flex flex-col justify-between items-start shadow-2xl transition-[background-position_0s_ease] hover:bg-[position:200%_0,0_0] hover:duration-[1500ms]">
-    //   <p className="text-white/60 font-medium text-base">
-    //     {index}. {topic}
-    //   </p>
-    //   <div className="flex flex-col w-full gap-4">
-    //     <div className="flex justify-between w-full items-end">
-    //       <p className="font-extrabold text-2xl capitalize">{title}</p>
-    //       <Image alt="" src={FlipIcon}></Image>
-    //     </div>
-    //     <p className="text-nowrap w-full overflow-hidden text-ellipsis text-base font-medium text-white/80">
-    //       {subtitle}
-    //     </p>
-    //   </div>
-    // </div>
   );
 };
 

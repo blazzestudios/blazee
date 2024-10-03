@@ -22,7 +22,6 @@ export default function RootLayout({
       <body
         className={`${MavenPro.className}  antialiased fixed  w-full h-full`}
       >
-        {/* <MouseFollower /> */}
         <NavBar />
 
         {children}
