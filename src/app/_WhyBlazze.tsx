@@ -90,9 +90,17 @@ export default function WhyBlazze() {
               <Image className="h-fit" alt="icon" src={li.logo} />
               <div className="flex flex-col w-full justify-between items-start leading-[26px] tracking-tighter gap-4">
                 <p className="text-2xl font-extrabold">{li.title}</p>
-                {selectedIndex === i && (
-                  <p className="text-base text-white/80">{li.subtitle}</p>
-                )}
+                <div
+                  className={`overflow-hidden transition-all  ease-in-out ${
+                    selectedIndex === i
+                      ? "max-h-[200px] opacity-100 duration-700"
+                      : "max-h-0 opacity-0 duration-0"
+                  }`}
+                >
+                  <p className="text-base font-medium text-white/80 ">
+                    {li.subtitle}
+                  </p>
+                </div>
               </div>
             </div>
 
