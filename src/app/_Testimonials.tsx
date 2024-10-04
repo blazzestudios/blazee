@@ -75,7 +75,7 @@ export default function SeamlessScrollGallery() {
           onClick={() => {
             setCurrentIndex((i) => --i);
           }}
-          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full cursor-pointer ${
+          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full  ${
             currentIndex === 0 && "opacity-40"
           }`}
         >
@@ -90,7 +90,7 @@ export default function SeamlessScrollGallery() {
             setCurrentIndex((i) => ++i);
           }}
           disabled={currentIndex === slide.length - 1}
-          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full  cursor-pointer ${
+          className={` flex justify-center items-center border-[2px] border-[#1D1D1D] aspect-square lg:w-16 w-11 p-2 lg:p-3 rounded-full   ${
             currentIndex === slide.length - 1 && "opacity-40"
           }`}
         >

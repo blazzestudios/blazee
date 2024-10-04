@@ -2,6 +2,7 @@ import HeroSection from "./_HeroSection";
 import SeamlessScrollGallery from "./_Testimonials";
 
 import WhatWeOffer from "./_WhatWeOffer";
+import WhyBlazze from "./_WhyBlazze";
 
 import Footer from "./components/Footer";
 import InfiniteScrollInfoBar from "./components/InfiniteScrollInfoBar";
@@ -14,7 +15,7 @@ export default function Home() {
       <InfiniteScrollInfoBar />
       <WhatWeOffer />
       <SeamlessScrollGallery />
-
+      <WhyBlazze />
       <Footer />
     </div>
   );

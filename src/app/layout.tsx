@@ -20,8 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${MavenPro.className}  antialiased fixed  w-full h-full`}
+        className={`${MavenPro.className}  antialiased fixed  w-full h-full `}
       >
+        {/* <MouseFollower /> */}
         <NavBar />
 
         {children}

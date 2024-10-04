@@ -37,10 +37,17 @@ export const CardShineEffect = ({
             <p className="text-white/60 font-medium text-base">
               {index}. {topic}
             </p>
+            {/* <p className="w-full text-center text-2xl opacity-10">
+              Tap To Flip
+            </p> */}
             <div className="flex flex-col w-full gap-4">
               <div className="flex justify-between w-full items-end">
                 <p className="font-extrabold text-2xl capitalize">{title}</p>
-                <Image alt="" src={FlipIcon}></Image>
+                <Image
+                  className="max-w-[32px] lg:max-w-[36px] animate-ping"
+                  alt=""
+                  src={FlipIcon}
+                ></Image>
               </div>
               <p className="text-nowrap w-full overflow-hidden text-ellipsis text-base font-medium text-white/80">
                 {subtitle}
@@ -78,11 +85,11 @@ export const CardShineEffect = ({
 export default function WhatWeOffer() {
   return (
     <div className="max-w-[1300px] px-5 py-24 flex-col flex mx-auto items-start w-full gap-24">
-      <div className="flex flex-col gap-[10px]">
-        <p className="uppercase text-base font-normal text-white/60 ">
+      <div className="flex flex-col gap-[10px] items-center lg:items-start">
+        <p className="uppercase text-base font-normal text-white/60 text-center lg:text-start">
           What We Offer
         </p>
-        <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[713px]">
+        <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[713px] lg:text-start text-center">
           Crafting Innovative Product Design & Development
         </h2>
       </div>
