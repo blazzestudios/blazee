@@ -1,4 +1,5 @@
 import HeroSection from "./_HeroSection";
+import OurWork from "./_OurWork";
 import SeamlessScrollGallery from "./_Testimonials";
 
 import WhatWeOffer from "./_WhatWeOffer";
@@ -13,7 +14,9 @@ export default function Home() {
       <div className="min-h-16 w-full lg:block hidden" />
       <HeroSection />
       <InfiniteScrollInfoBar />
+      <OurWork />
       <WhatWeOffer />
+
       <SeamlessScrollGallery />
       <WhyBlazze />
       <Footer />

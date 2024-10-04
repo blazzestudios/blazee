@@ -85,11 +85,11 @@ export const CardShineEffect = ({
 export default function WhatWeOffer() {
   return (
     <div className="max-w-[1300px] px-5 py-24 flex-col flex mx-auto items-start w-full gap-24">
-      <div className="flex flex-col gap-[10px] items-center lg:items-start">
-        <p className="uppercase text-base font-normal text-white/60 text-center lg:text-start">
+      <div className="flex flex-col gap-[10px] items-start">
+        <p className="uppercase text-base font-normal text-white/60  text-start">
           What We Offer
         </p>
-        <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[713px] lg:text-start text-center">
+        <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[713px] text-start ">
           Crafting Innovative Product Design & Development
         </h2>
       </div>
