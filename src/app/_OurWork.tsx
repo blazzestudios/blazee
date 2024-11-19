@@ -1,4 +1,4 @@
-export default function OurWork() {
+export default function OurWork({ des }: { des?: boolean }) {
   const images: string[] = [
     "https://images.unsplash.com/photo-1720048171596-6a7c81662434?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
     "https://plus.unsplash.com/premium_photo-1686247805255-324dfc4e230a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
@@ -27,15 +27,21 @@ export default function OurWork() {
   const columns = chunkArray(images, 4);
 
   return (
-    <div className="max-w-[1300px] px-5 py-24 flex-col flex mx-auto items-start w-full gap-24">
-      <div className="flex flex-col gap-[10px] items-start">
-        <p className="uppercase text-base font-normal text-white/60 text-start">
-          Our Work
-        </p>
-        <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[800px] text-start capitalize">
-          {`Our studio excels in various areas, with a strong focus on product design and development.`}
-        </h2>
-      </div>
+    <div
+      className={`max-w-[1300px] px-5 ${
+        !des && "py-24"
+      } flex-col flex mx-auto items-start w-full gap-24`}
+    >
+      {!des && (
+        <div className="flex flex-col gap-[10px] items-start">
+          <p className="uppercase text-base font-normal text-white/60 text-start">
+            Our Work
+          </p>
+          <h2 className="text-5xl font-semibold leading-[90%] tracking-tighter max-w-[800px] text-start capitalize">
+            {`Our studio excels in various areas, with a strong focus on product design and development.`}
+          </h2>
+        </div>
+      )}
 
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

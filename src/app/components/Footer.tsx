@@ -4,14 +4,14 @@ import BlazzeFullLogo from "@/assets/icons/blazzeFullIcon.svg";
 
 export default function Footer() {
   return (
-    <div className="flex w-full h-full flex-col gap-[26px] lg:gap-[44px]">
+    <div className="flex w-full flex-col gap-[26px] lg:gap-[44px]">
       <div className="w-full max-w-[1300px] lg:px-5 p-[26px] gap-6 flex-col flex mx-auto">
         <Image
           className="max-w-[68px] mt-5 ml-1"
           alt="LOGO "
           src={BlazzeFullLogo}
         ></Image>
-        <div className="w-full flex flex-col lg:flex-row gap-16  justify-between">
+        <div className="w-full h-full flex flex-col lg:flex-row gap-16  justify-between">
           <div className="flex flex-col h-full gap-16 lg:w-[65%]">
             <p className="text-5xl text-start lg:text-[85px] font-bold leading-[90%] -tracking-[4px] lg:min-w-[560px]">
               Ready ? Chat to one of the team and let’s get this going.
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full  bg-[#171717] lg:p-[10px] px-[26px] py-[10px] ">
+      <div className="w-full h-full  bg-[#171717] lg:p-[10px] px-[26px] py-[10px] ">
         <div className="max-w-[1300px] mx-auto w-full lg:px-5 py-[24px] lg:py-[26px] flex justify-between items-end gap-[26px]">
           <div className="flex flex-col lg:gap-3 gap-2 w-full">
             <p className="lg:text-base text-sm font-normal leading-3">

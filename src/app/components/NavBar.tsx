@@ -18,13 +18,22 @@ export default function NavBar() {
         }`}
       >
         <div className="flex justify-between items-center">
-          <Image className="lg:hidden block" alt="Logo" src={BlazzeTextIcon} />
-          <div className=" gap-[26px] items-center hidden lg:flex">
+          <Link className="lg:hidden block" href={"/"}>
             <Image
-              className=" mb-[23px] mt-[3px]"
+              className="lg:hidden block"
               alt="Logo"
-              src={BlazzeFullIcon}
+              src={BlazzeTextIcon}
             />
+          </Link>
+          <div className=" gap-[26px] items-center hidden lg:flex">
+            <Link href={"/"}>
+              {" "}
+              <Image
+                className=" mb-[23px] mt-[3px]"
+                alt="Logo"
+                src={BlazzeFullIcon}
+              />
+            </Link>
             {["work", "about", "service"].map((link) => {
               return (
                 <Link href={link} key={link} className=" text-base font-normal">
